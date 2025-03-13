@@ -52,12 +52,25 @@ public class Test {
 //			}
 //		}
 
-		// #3 parameter
+		// #3 named parameter
+//		{
+//			// SQL : "Select * from employee where id = 3"
+//			String jpql = "select e from Employee e where id >= :id";	// Entity 를 이용한 query 형식
+//			TypedQuery<Employee> query = em.createQuery(jpql, Employee.class);
+//			query.setParameter("id", 2);
+//			List<Employee> list = query.getResultList();
+//
+//			for (Employee employee : list) {
+//				System.out.println(employee);
+//			}
+//		}
+
+		// #4 positional parameter
 		{
 			// SQL : "Select * from employee where id = 3"
-			String jpql = "select e from Employee e where id >= :id";	// Entity 를 이용한 query 형식
+			String jpql = "select e from Employee e where id >= ?1";	// Entity 를 이용한 query 형식
 			TypedQuery<Employee> query = em.createQuery(jpql, Employee.class);
-			query.setParameter("id", 2);
+			query.setParameter(1, 2);
 			List<Employee> list = query.getResultList();
 
 			for (Employee employee : list) {

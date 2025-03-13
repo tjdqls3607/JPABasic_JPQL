@@ -78,15 +78,30 @@ public class Test {
 //			}
 //		}
 
-		// #5 single result
-		{
-			// SQL : "Select * from employee where id = 3"
-			String jpql = "select e from Employee e where id = ?1";	// Entity 를 이용한 query 형식
-			TypedQuery<Employee> query = em.createQuery(jpql, Employee.class);
-			query.setParameter(1, 3);
-			Employee e = query.getSingleResult();
+//		// #5 single result
+//		{
+//			// SQL : "Select * from employee where id = 3"
+//			String jpql = "select e from Employee e where id = ?1";	// Entity 를 이용한 query 형식
+//			TypedQuery<Employee> query = em.createQuery(jpql, Employee.class);
+//			query.setParameter(1, 3);
+//			Employee e = query.getSingleResult();
+//
+//			System.out.println(e);
+//		}
 
-			System.out.println(e);
+		// #6 like
+		{
+			// SQL : "Select * from employee where name like %길동%"
+			String jpql = "select e from Employee e where e.name like :searchWord";	// Entity 를 이용한 query 형식
+//			String searchWord = "%길동%";
+			String searchWord = "홍%";
+			TypedQuery<Employee> query = em.createQuery(jpql, Employee.class);
+			query.setParameter("searchWord", searchWord);
+			List<Employee> list = query.getResultList();
+
+			for (Employee employee : list) {
+				System.out.println(employee);
+			}
 		}
 
 //		em.getTransaction().commit();  // 이 시점에 테이블에 반영한다.
